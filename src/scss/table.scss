@@ -29,6 +29,7 @@
     }
     .column {
       display: flex;
+      position: relative;
       justify-content: center;
       align-items: center;
       background: #f8f9fa;
@@ -38,6 +39,14 @@
       border: 1px solid $border-color;
       border-top: none;
       border-left: none;
+      .col-resize {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 2px;
+        background:blue;
+      }
     }
     .cell {
       min-width: 40px;

@@ -12,7 +12,10 @@ function toCell(_, index) {
 
 function toColumn(item) {
   return `
-    <div class="column">${item}</div>
+    <div class="column">
+      ${item}
+      <div class="col-resize"></div>
+    </div>
   `
 }
 
