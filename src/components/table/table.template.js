@@ -6,24 +6,26 @@ const CODES = {
 function toCell(_, index) {
   // ${index === 0 ? 'selected': ''}
   return `
-    <div class="cell" contenteditable></div>
+    <div class="cell" data-col="${index}" contenteditable></div>
   `
 }
 
-function toColumn(item) {
+function toColumn(item, index) {
   return `
-    <div class="column">
+    <div class="column" data-col="${index}" data-type="resizable">
       ${item}
-      <div class="col-resize"></div>
+      <div class="col-resize" data-resize="col"></div>
     </div>
   `
 }
 
-function createRow(content, rowNumber = 0) {
+function createRow(content, rowNumber) {
+  const resizer = rowNumber ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
-    <div class="excel__table-row" >
+    <div class="excel__table-row" data-type="resizable">
       <div class="row-info">
         ${rowNumber ? rowNumber : ''}
+        ${resizer}
       </div>
       <div class="row-data">
         ${content}
