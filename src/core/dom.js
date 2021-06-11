@@ -22,6 +22,16 @@ class Dom {
     return this.$el.outerHTML.trim()
   }
 
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+    return this.$el.tagName.toLowerCase() === 'input'
+      ? this.$el.value.trim()
+      : this.$el.textContent.trim()
+  }
+
   clear() {
     this.html('')
     return this
@@ -39,13 +49,27 @@ class Dom {
     return this
   }
 
+  isNew(elementsArray) {
+    return !elementsArray.find($element => $element.$el === elementsArray.$el)
+  }
+
   closest(selector) {
     return $(this.$el.closest(selector))
+  }
+
+  find(selector) {
+    const element = this.$el.querySelector(selector)
+    return element ? $(element) : null
   }
 
   findAll(selector) {
     return Array.from(this.$el.querySelectorAll(selector))
         .map(item => $(item))
+  }
+
+  focus() {
+    this.$el.focus()
+    return this
   }
 
   get data() {
@@ -66,6 +90,27 @@ class Dom {
   clearInlineStyle() {
     this.$el.removeAttribute('style')
     return this
+  }
+
+  addClass(classes) {
+    this.$el.classList.add(classes)
+    return this
+  }
+
+  removeClass(classes) {
+    this.$el.classList.remove(classes)
+    return this
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+      return {
+        row: +parsed[0],
+        col: +parsed[1]
+      }
+    }
+    return this.data.id
   }
 }
 
