@@ -7,8 +7,10 @@ export default class Formula extends ExcelComponent {
     super($root, {
       name: 'Formula',
       listeners: ['input', 'keydown'],
+      subscribe: ['currentText'],
       ...options
     })
+    this.formulaInput = null
   }
 
   toHTML() {
@@ -20,16 +22,13 @@ export default class Formula extends ExcelComponent {
 
   init() {
     super.init()
-    const formulaInput = this.$root.find('[data-type="formula-input"')
-    this.$on('table:mousedown', text => {
-      formulaInput.text(text)
-    })
-    this.$on('table:keydown', text => {
-      formulaInput.text(text)
-    })
-    this.$on('table:input', text => {
-      formulaInput.text(text)
-    })
+    this.formulaInput = this.$root.find('[data-type="formula-input"')
+  }
+
+  storeChanged(changes) {
+    if (changes.currentText !== this.formulaInput.text()) {
+      this.formulaInput.text(changes.currentText)
+    }
   }
 
   onInput(event) {

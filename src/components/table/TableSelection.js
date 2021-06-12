@@ -29,6 +29,10 @@ export default class TableSelection {
     })
   }
 
+  get selectedIds() {
+    return this.group.map($element => $element.id())
+  }
+
   selectNext(row, col, $root) {
     const $element = $root.find(`[data-id="${row}:${col}"]`)
     if ($element) {
@@ -40,6 +44,10 @@ export default class TableSelection {
   clear() {
     this.group.forEach($element => $element.removeClass(TableSelection.className))
     this.group = []
+  }
+
+  applyStyle(style) {
+    this.group.forEach($element => $element.css(style))
   }
 }
 

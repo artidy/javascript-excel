@@ -10,6 +10,7 @@
     font-size: 18px;
   }
   &:active, &.active {
+    background: rgb(211, 209, 209);
     color: $color;
   }
   &:hover {
