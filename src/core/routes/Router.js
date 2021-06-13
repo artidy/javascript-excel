@@ -1,3 +1,4 @@
+import Loader from '../../components/loader/Loader'
 import $ from '../dom'
 import ActiveRoute from './ActiveRoute'
 
@@ -8,6 +9,7 @@ export class Router {
     }
     this.$placeholder = $(selector)
     this.routes = routes
+    this.loader = new Loader().getRoot()
     this.page = null
     this.changePageHandler = this.changePageHandler.bind(this)
     this.init()
@@ -18,7 +20,7 @@ export class Router {
     this.changePageHandler()
   }
 
-  changePageHandler() {
+  async changePageHandler() {
     if (this.page) {
       this.page.destroy()
     }
@@ -28,7 +30,9 @@ export class Router {
       CurrentPage = this.routes[path]
     }
     this.page = new CurrentPage(ActiveRoute.param)
-    this.$placeholder.clear().append(this.page.getRoot())
+    this.$placeholder.clear().append(this.loader)
+    const root = await this.page.getRoot()
+    this.$placeholder.clear().append(root)
 
     this.page.afterRender()
   }
