@@ -12,6 +12,14 @@ export function storage(key, data = null) {
   localStorage.setItem(key, JSON.stringify(data))
 }
 
+export function clearStorage(key) {
+  if (key) {
+    localStorage.removeItem(key)
+    return true
+  }
+  return false
+}
+
 export function convertToStyleString(styles, result = '') {
   if (styles) {
     Object.keys(styles).forEach(styleName => {
@@ -47,4 +55,12 @@ export function debounce(callback, wait) {
     clearTimeout(timeout)
     timeout = setTimeout(later, wait)
   }
+}
+
+export function getUniqueId() {
+  return Date.now().toString()
+}
+
+export function preventDefault(event) {
+  event.preventDefault()
 }

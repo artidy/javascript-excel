@@ -1,7 +1,7 @@
 import ExcelStateComponent from '@core/ExcelStateComponent'
 import {createToolbar} from './toolbar.template'
 import $ from '@core/dom'
-import {initialState} from '@/redux/initialState'
+// import {initialState} from '@/redux/initialState'
 import {defaultStyles} from '@/defaultStyles'
 
 export default class Toolbar extends ExcelStateComponent {
@@ -52,7 +52,7 @@ export default class Toolbar extends ExcelStateComponent {
   }
 
   prepare() {
-    this.initState(initialState.currentStyle)
+    this.initState(this.store.currentStyle)
   }
 
   get template() {
