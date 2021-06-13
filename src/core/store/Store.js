@@ -3,16 +3,15 @@ export default class Store {
     this.state = reducer({...initialState}, {type: '__INIT__'})
     this.listeners = []
     this.reducer = reducer
-    this.unsubscribe = this.unsubscribe.bind(this)
   }
 
   subscribe(callback) {
     this.listeners.push(callback)
-    return this.unsubscribe
-  }
-
-  unsubscribe(callback) {
-    this.listeners = this.listeners.filter(listener => listener != callback)
+    return {
+      unsubscribe: (callback) => {
+        this.listeners = this.listeners.filter(listener => listener != callback)
+      }
+    }
   }
 
   dispatch(action) {
