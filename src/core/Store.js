@@ -9,14 +9,18 @@ export default class Store {
     this.listeners.push(callback)
     return {
       unsubscribe(callback) {
-        this.listeners = this.listeners.filter(listener => listener != callback)
+        if (this.listeners) {
+          this.listeners = this.listeners.filter(listener => listener != callback)
+        }
       }
     }
   }
 
   dispatch(action) {
     this.state = this.reducer(this.state, action)
-    this.listeners.forEach(listener => listener(this.state))
+    if (this.listeners) {
+      this.listeners.forEach(listener => listener(this.state))
+    }
   }
 
   getState() {
