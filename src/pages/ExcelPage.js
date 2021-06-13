@@ -1,5 +1,5 @@
 import Page from '@core/Page'
-import Store from '@core/Store'
+import Store from '@core/store/Store'
 import reducer from '@/redux/reducer'
 import {debounce, storage} from '@core/utils'
 import Excel from '@/components/excel'

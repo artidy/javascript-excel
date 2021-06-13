@@ -1,4 +1,4 @@
-import {defaultStyles} from '@/defaultStyles'
+import {defaultStyles} from '../defaultStyles'
 
 class Dom {
   constructor(selector) {
